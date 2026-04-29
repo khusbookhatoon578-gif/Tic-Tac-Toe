@@ -1,30 +1,28 @@
 public class TicTacToe {
 
+    static char[][] board = {
+            {'_', '_', '_'},
+            {'_', 'X', '_'},
+            {'_', '_', 'O'}
+    };
+
     /**
-     * Entry point of the program.
-     * Demonstrates slot-to-index conversion using a sample slot value.
+     * Entry point of the program. Tests the validation logic
+     * using sample row and column values.
      */
     public static void main(String[] args) {
-        int slot = 7; // Example slot number
-        System.out.println("Row: " + getRowFromSlot(slot));
-        System.out.println("Column: " + getColFromSlot(slot));
+        System.out.println(isValidMove(1, 1)); // Expected: false (cell occupied)
+        System.out.println(isValidMove(0, 0)); // Expected: true (cell empty)
+        System.out.println(isValidMove(3, 0)); // Expected: false (out of bounds)
     }
 
-    /**
-     * Converts slot number into row index using zero-based indexing.
-     * Input: Slot number (1–9)
-     * Output: Row index (0–2)
-     */
-    static int getRowFromSlot(int slot) {
-        return (slot - 1) / 3;
-    }
 
-    /**
-     * Converts slot number into column index using modulo operation.
-     * Input: Slot number (1–9)
-     * Output: Column index (0–2)
-     */
-    static int getColFromSlot(int slot) {
-        return (slot - 1) % 3;
+    static boolean isValidMove(int row, int col) {
+        // Check if row and col are within bounds
+        if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
+            return false;
+        }
+        // Check if the cell is empty
+        return board[row][col] == '_';
     }
 }
