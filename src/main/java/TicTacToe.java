@@ -1,41 +1,52 @@
-
-
 /**
  * TicTacToe
- * UC8 controls the continuous game loop and alternates
- * turns until the game ends.
+ * UC9 checks whether a player has won by examining
+ * rows, columns, and diagonals.
  */
 public class TicTacToe {
 
-    static boolean isHumanTurn = true;
-    static boolean gameOver = false;
+    static char[][] board = new char[3][3];
 
     /**
-     * Entry point of the program. Demonstrates the structure
-     * of a continuous game loop.
+     * Entry point of the program. Tests the win-check logic.
      */
     public static void main(String[] args) {
-        // Example loop for demonstration
-        while (!gameOver) {
-            if (isHumanTurn) {
-                System.out.println("Human's turn...");
-                // Simulate human move
-                // TODO: Add actual move logic
-            } else {
-                System.out.println("Computer's turn...");
-                // Simulate computer move
-                // TODO: Add actual move logic
-            }
+        // Example board setup
+        board[0][0] = 'X';
+        board[0][1] = 'X';
+        board[0][2] = 'X';
 
-            // Alternate turns
-            isHumanTurn = !isHumanTurn;
+        System.out.println(hasWon('X')); // Should print true
+    }
 
-            // Example condition to end the game
-            // Replace with actual win/draw logic
-            if (Math.random() > 0.8) {
-                gameOver = true;
-                System.out.println("Game Over!");
+    /**
+     * Checks all possible winning patterns for the given symbol.
+     * @param symbol Player symbol
+     * @return true if win detected
+     */
+    static boolean hasWon(char symbol) {
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == symbol && board[i][1] == symbol && board[i][2] == symbol) {
+                return true;
             }
         }
+
+        // Check columns
+        for (int j = 0; j < 3; j++) {
+            if (board[0][j] == symbol && board[1][j] == symbol && board[2][j] == symbol) {
+                return true;
+            }
+        }
+
+        // Check diagonals
+        if (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol) {
+            return true;
+        }
+        if (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol) {
+            return true;
+        }
+
+        return false;
     }
 }
